@@ -14,65 +14,48 @@
     <ion-fab-button>
       <ion-icon name="share"></ion-icon>
     </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button><ion-icon name="logo-whatsapp"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="bottom">
+      <ion-fab-button><ion-icon name="logo-facebook"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-fab-button><ion-icon name="logo-instagram"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="end">
+      <ion-fab-button><ion-icon name="logo-twitter"></ion-icon></ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
-  <ion-card>
-      <img src="/assets/strangerthings3.jpeg" alt=""/>
+  <ion-card *ngFor="let serie of dadosPost">
+      <img src="{{ serie.imagem }}">
       <ion-card-header>
-          <ion-card-subtitle>Suspense, Ficção</ion-card-subtitle>
+          <ion-card-subtitle>{{ serie.subtitle }}</ion-card-subtitle>
           <div class="centro">
-          <ion-card-title>Stranger Things</ion-card-title>
+          <ion-card-title>{{ serie.nome }}</ion-card-title>
           <ion-chip>
-            <ion-label>4.5</ion-label>
+            <ion-label>{{ serie.nota }}</ion-label>
           </ion-chip>
           </div>
-
+          <ion-row>
+            <ion-col size="3">
+          <ion-icon size="large" name="thumbs-up" (click)="like(serie)" color="{{serie.estadoLike ? 'success' : 'dark'}}"></ion-icon>
+          <p>{{ serie.numeroLikes }}</p>
+            </ion-col>
+            <ion-col>
+          <ion-icon size="large" name="thumbs-down" (click)="deslike(serie)" color="{{serie.estadoDeslike ? 'danger' : 'dark'}}"></ion-icon>
+          <p>{{ serie.numeroDeslikes }}</p>
+          </ion-col>
+          <ion-col>
+            <ion-icon *ngIf="serie.tem_spoiler" name="warning" color="danger" size="large"></ion-icon>
+          </ion-col>
+          </ion-row>
       </ion-card-header>
-      <ion-card-content>Quando Will (Noah Schnapp), um menino de doze anos, desaparece misteriosamente, o xerife Jim Hopper (David Harbour) inicia uma operação para encontrá-lo. Enquanto isso, Mike (Finn Wolfhard), Dustin (Gaten Matarazzo) e Lucas (Caleb McLaughlin), melhores amigos do garoto, decidem procurar Will por conta própria. Mas as investigações acabam os levando a experimentos secretos do governo e a uma peculiar menina perdida na floresta.</ion-card-content>
+      <ion-card-content></ion-card-content>
       <div class="botao">
       <ion-button (click)="presentToast()" fill="outline">COMENTAR</ion-button>
       <ion-button (click)="alerta()" fill="outline">JÁ COMENTEI</ion-button>
-
       </div>
-  </ion-card>
-  <ion-card class="welcome-card">
-    <img src="/assets/shapes.svg" alt=""/>
-    <ion-card-header>
-      <ion-card-title>{{dadosPost.nome}}</ion-card-title>
-      <ion-row>
-        <ion-col size="3">
-      <ion-icon size="large" name="thumbs-up" (click)="like(dadosPost)" color="{{dadosPost.estadoLike ? 'success' : 'dark'}}"></ion-icon>
-      <p>{{ dadosPost.numeroLikes }}</p>
-        </ion-col>
-        <ion-col>
-      <ion-icon size="large" name="thumbs-down" (click)="deslike(dadosPost)" color="{{dadosPost.estadoDeslike ? 'danger' : 'dark'}}"></ion-icon>
-      <p>{{ dadosPost.numeroDeslikes }}</p>
-      </ion-col>
-      </ion-row>
-        <ion-card-subtitle>{{dadosPost.texto}}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-    </ion-card-content>
-  </ion-card>
+    </ion-card>
 
-  <ion-list lines="none">
-    <ion-list-header>
-      <ion-label>Resources</ion-label>
-    </ion-list-header>
-    <ion-item href="https://ionicframework.com/docs/">
-      <ion-icon slot="start" color="medium" name="book"></ion-icon>
-      <ion-label>Ionic Documentation</ion-label>
-    </ion-item>
-    <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-      <ion-icon slot="start" color="medium" name="build"></ion-icon>
-      <ion-label>Scaffold Out Your App</ion-label>
-    </ion-item>
-    <ion-item href="https://ionicframework.com/docs/layout/structure">
-      <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-      <ion-label>Change Your App Layout</ion-label>
-    </ion-item>
-    <ion-item href="https://ionicframework.com/docs/theming/basics">
-      <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-      <ion-label>Theme Your App</ion-label>
-    </ion-item>
-  </ion-list>
-</ion-content>
+  <app-post></app-post>

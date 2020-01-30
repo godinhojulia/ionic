@@ -8,29 +8,41 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  dadosPost;
-  constructor(public alertController: AlertController, public toastController: ToastController) {
-    this.dadosPost= {
-     "nome": "João da Silva",
-     "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-     "horario": "17:52",
-     "numeroLikes": 123,
-     "numeroDeslikes": 32,
-     "episodio": 3,
-     "comentario": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-     "estadoLike": false,
-     "estadoDeslike": false,
-     "anexo": 'string',
-     "numeroCompartilhamentos": 50,
+  dadosPost= [{
+   "imagem": "../assets/strangerthings3.jpeg",
+   "nome": "Stranger Things",
+   "subtitle": "Suspense, Ficção",
+   "numeroLikes": 123,
+   "numeroDeslikes": 32,
+   "estadoDeslike": false,
+   "anexo": 'string',
+   "numeroCompartilhamentos": 50,
+   "tem_spoiler": true,
+   "nota": 4.5,
 
-   };
+ },
+ {
+ "imagem": "../assets/gossipgirl.jpg",
+ "nome": "Gossip Girl",
+ "subtitle": "Drama, Romance",
+ "numeroLikes": 140,
+ "numeroDeslikes": 53,
+ "estadoDeslike": false,
+ "anexo": 'string',
+ "numeroCompartilhamentos": 50,
+ "tem_spoiler": false,
+ "nota": '4.0',
+
+}];
+  constructor(public alertController: AlertController, public toastController: ToastController) {
+
 
   }
   async alerta() {
     const alert = await this.alertController.create({
       header: 'Irado!',
-      subHeader: 'Gostaria de avaliar essa série?',
-      buttons: ['Não', 'Sim']
+      subHeader: 'Gostaria de compartilhar essa série?',
+      buttons: ['Sim', 'Não']
     });
 
   await alert.present();
@@ -38,48 +50,49 @@ export class HomePage {
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Série adicionada à "Minha lista"',
-      duration: 2000,
+      duration: 3000
     });
 
   toast.present();
-  }
+}
 
 
-  like(dadosPost: any){
-    if(this.dadosPost.estadoLike){
-      this.dadosPost.numeroLikes--;
+
+  like(serie: any){
+    if(serie.estadoLike){
+      serie.numeroLikes--;
     } else{
-      this.dadosPost.numeroLikes++;
-      if(this.dadosPost.estadoDeslike){
-      this.dadosPost.numeroDeslikes--;
+      serie.numeroLikes++;
+      if(serie.estadoDeslike){
+      serie.numeroDeslikes--;
     }
     }
-    this.dadosPost.estadoLike=!this.dadosPost.estadoLike;
-    this.dadosPost.estadoDeslike=false;
+    serie.estadoLike=!serie.estadoLike;
+    serie.estadoDeslike=false;
   }
 
-   deslike(dadosPost: any){
-    if(this.dadosPost.estadoDeslike){
-      this.dadosPost.numeroDeslikes--;
+   deslike(serie: any){
+    if(serie.estadoDeslike){
+      serie.numeroDeslikes--;
     } else{
-      this.dadosPost.numeroDeslikes++;
-      if(this.dadosPost.estadoLike){
-      this.dadosPost.numeroLikes--;
+      serie.numeroDeslikes++;
+      if(serie.estadoLike){
+      serie.numeroLikes--;
     }
     }
-    this.dadosPost.estadoDeslike=!this.dadosPost.estadoDeslike;
-    this.dadosPost.estadoLike=false;
+    serie.estadoDeslike=!serie.estadoDeslike;
+    serie.estadoLike=false;
   }
 
-   mudaCor(dadosPost: any){
-    if(this.dadosPost.estadoDeslike==false){
+   mudaCor(serie: any){
+    if(serie.estadoDeslike==false){
       //color = 'red';
-      this.dadosPost.numeroDeslikes++;
-      this.dadosPost.estadoDeslike=true;
+      serie.numeroDeslikes++;
+      serie.estadoDeslike=true;
     } else{
       //color = 'blue';
-      this.dadosPost.estadoLike=false;
-      this.dadosPost.numeroLikes--;
+      serie.estadoLike=false;
+      serie.numeroLikes--;
     }
   }
 }
