@@ -3,8 +3,23 @@
   overflow: hidden;
 }
 ion-card-title{
-  color: #FF2D00;
+  color: #000000;
 }
 ion-lable{
   font-weight: bold;
+}
+ion-card-subtitle{
+  color: #FF2D00;
+}
+ion-chip{
+  background-color: #FF2D00;
+  color: #FFFFFF;
+}
+.centro{
+  display: flex;
+  justify-content: space-between;
+}
+.botao{
+  display: flex;
+  justify-content: space-around;
 }

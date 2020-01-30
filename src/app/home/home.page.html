@@ -10,17 +10,47 @@
 </ion-header>
 
 <ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="share"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card>
+      <img src="/assets/strangerthings3.jpeg" alt=""/>
+      <ion-card-header>
+          <ion-card-subtitle>Suspense, Ficção</ion-card-subtitle>
+          <div class="centro">
+          <ion-card-title>Stranger Things</ion-card-title>
+          <ion-chip>
+            <ion-label>4.5</ion-label>
+          </ion-chip>
+          </div>
+
+      </ion-card-header>
+      <ion-card-content>Quando Will (Noah Schnapp), um menino de doze anos, desaparece misteriosamente, o xerife Jim Hopper (David Harbour) inicia uma operação para encontrá-lo. Enquanto isso, Mike (Finn Wolfhard), Dustin (Gaten Matarazzo) e Lucas (Caleb McLaughlin), melhores amigos do garoto, decidem procurar Will por conta própria. Mas as investigações acabam os levando a experimentos secretos do governo e a uma peculiar menina perdida na floresta.</ion-card-content>
+      <div class="botao">
+      <ion-button (click)="presentToast()" fill="outline">COMENTAR</ion-button>
+      <ion-button (click)="alerta()" fill="outline">JÁ COMENTEI</ion-button>
+
+      </div>
+  </ion-card>
   <ion-card class="welcome-card">
     <img src="/assets/shapes.svg" alt=""/>
     <ion-card-header>
-      <ion-card-subtitle>Welcome to</ion-card-subtitle>
-      <ion-card-title>FriendFlix</ion-card-title>
+      <ion-card-title>{{dadosPost.nome}}</ion-card-title>
+      <ion-row>
+        <ion-col size="3">
+      <ion-icon size="large" name="thumbs-up" (click)="like(dadosPost)" color="{{dadosPost.estadoLike ? 'success' : 'dark'}}"></ion-icon>
+      <p>{{ dadosPost.numeroLikes }}</p>
+        </ion-col>
+        <ion-col>
+      <ion-icon size="large" name="thumbs-down" (click)="deslike(dadosPost)" color="{{dadosPost.estadoDeslike ? 'danger' : 'dark'}}"></ion-icon>
+      <p>{{ dadosPost.numeroDeslikes }}</p>
+      </ion-col>
+      </ion-row>
+        <ion-card-subtitle>{{dadosPost.texto}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <p>
-        Now that your app has been created, you'll want to start building out features
-        and components. Check out some of the resources below for next steps.
-      </p>
     </ion-card-content>
   </ion-card>
 
